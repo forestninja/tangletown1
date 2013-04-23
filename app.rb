@@ -42,3 +42,8 @@ end
 get '/test' do
   "hello"
 end
+
+get '/signup' do
+  @title = "signup"
+  erb :signup
+end
