@@ -1,0 +1,6 @@
+/* site-wide custom styles */
+
+.navbar a.brand {
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
