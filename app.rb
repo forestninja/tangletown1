@@ -21,29 +21,6 @@ before do
 end
 
 get '/' do
-  @title = "page title, this is simple, look in layout.erb. The @ sign is magic"
+  @title = "TangleTown"
   erb :home
-end
-
-
-get '/test*' do
-  @title = "page title, this is simple, look in layout.erb. The @ sign is magic"
-  erb :home
-end
-
-get '/things' do
-  @array_of_things = []
-  @array_of_things << "cats"
-  @array_of_things << "dogs"
-  @array_of_things << "cars"
-  erb :things
-end
-
-get '/test' do
-  "hello"
-end
-
-get '/signup' do
-  @title = "signup"
-  erb :signup
 end
