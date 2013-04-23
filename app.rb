@@ -22,5 +22,5 @@ end
 
 get '/' do
   @title = "TangleTown"
-  erb :home
+  erb :welcome
 end
