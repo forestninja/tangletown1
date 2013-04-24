@@ -1,6 +1,15 @@
-/* site-wide custom styles */
+/* custom styles */
 
 .navbar a.brand {
 	padding-top: 4px;
 	padding-bottom: 4px;
-}
+} /* Make the logo fit properly in the header bar. */
+
+img.tt-product-image {
+	border: 1px solid #F1F1F1;
+	padding: 4px;
+} /* Style the brag book product images on the homepage. */
+
+div.tt-product-image {
+	padding-right: 16px;
+} /* Style the brag book product images on the homepage. */
