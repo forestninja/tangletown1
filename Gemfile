@@ -8,4 +8,5 @@ gem 'rerun'
 gem 'rack-cache'
 gem 'pry'
 gem 'foreman'
+gem 'rack-google-analytics'
 

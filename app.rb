@@ -1,6 +1,9 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
+require 'rack-google-analytics'
+
+use Rack::GoogleAnalytics, :tracker => 'UA-40494819-1'
 
 configure do
   set :views, "#{File.dirname(__FILE__)}/views"
