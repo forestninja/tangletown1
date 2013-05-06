@@ -23,7 +23,14 @@
 		</div>
 	</div>
 </div>
-
+<br /><br /><br />
+<ul>
+<% @patterns.each do |pattern| %>
+	<li>
+		<%= pattern.name %>
+	</li>
+<% end %>
+</ul>
 
 
 
