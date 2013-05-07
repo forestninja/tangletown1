@@ -9,6 +9,7 @@ gem 'rack-cache'
 gem 'pry'
 gem 'foreman'
 gem 'rack-google-analytics'
-gem "activerecord"
-gem "sinatra-activerecord"
-gem "pg"
+gem 'activerecord'
+gem 'sinatra-activerecord'
+gem 'pg'
+gem 'filepicker-rails'
