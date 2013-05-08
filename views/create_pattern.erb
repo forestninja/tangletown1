@@ -1,4 +1,21 @@
+<script type="text/javascript">
+	function openFilePicker() {
+		filepicker.setKey('AOHt7XNQxWfcwuPTrvoewz');
+		filepicker.pickAndStore({
+			mimetype:"image/*", 
+			service:"COMPUTER",
+			multiple:"true",
+			location:"S3",
+		},
+     	function(fpfiles){
+ 			console.log(JSON.stringify(fpfiles));
+		});
+	}
+</script>
 <form action="/submit" method="POST">
 	<input type="text" name="pattern[name]" value="Enter Pattern Name" />
 	<input type="submit" value="Submit" />
 </form>
+
+<br /><br /><br />
+<input type="button" value="Open Filepicker" onclick="openFilePicker()" />
