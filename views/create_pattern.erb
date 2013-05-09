@@ -1,36 +1,64 @@
-<script type="text/javascript">
-	function openFilePicker() {
-		filepicker.setKey('AOHt7XNQxWfcwuPTrvoewz');
-		filepicker.pickAndStore(
-			{
-				mimetype:"image/*", 
-				service:"COMPUTER",
-				multiple:"true",
-				location:"S3",
-			},
-     		function(fpfiles){
- 				filepicker.stat(
-     				fpfiles, 
-     				{path: true},
-  					function(metadata){
-    					console.log(JSON.stringify(metadata));
-					}
-				)
-			}
-		);
-	}
-</script>
+<script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script> <!-- Image Uploader -->
+<script type="text/javascript" src="http://feather.aviary.com/js/feather.js"></script> <!-- Image Cropper -->
+
+
+<div align="center">
+	<div id="web_demo_pane" style="position: relative; max-width: 800px; min-width: 400px;"></div>
+</div>
 <form action="/submit" method="POST">
 	<input type="text" name="pattern[name]" value="Enter Pattern Name" />
 	<br />
-	<input type="text" name="pattern[step1url]" value="File URL Will Go Here" />
-	<input type="button" value="Upload Step 1 File" onclick="openFilePicker()" />
+	<input type="button" id="start_web_demo" value="Step 1 Upload" />
+	<input type="text" id="step_1_url" name="pattern[step1url]" value="File URL Should Go Here" />
+	<img id="web_demo_preview" alt="Preview">
 	<br />
 	<input type="submit" value="Submit" />
 </form>
 
 
-	
+<script type='text/javascript'>
+    //Setup Filepicker.io - to get an apikey, go to https://developers.filepicker.io/register/
+    filepicker.setKey('AOHt7XNQxWfcwuPTrvoewz');
+
+    //Setup Aviary
+    var featherEditor = new Aviary.Feather({
+        //Get an api key for Aviary at http://www.aviary.com/web-key
+        apiKey: 'Ve5ZUekR_0y-pq7kJJPdwg',
+        apiVersion: 2,
+        tools: 'crop',
+        initTool: 'crop',
+        cropPresets: [['Square','297x297']],
+        displayImageSize: 'true',
+        onSave: function(imageID, newURL) {
+            //Get the final file's S3 URL and put it in the form.
+            filepicker.storeUrl(newURL, {extension:'.png', location: 'S3'}, 
+            	function(FPFile){
+            		var stepURL = "https://s3.amazonaws.com/tangletown/" + FPFile.key;
+            		var stepURLfield = document.getElementById('step_1_url');
+            		stepURLfield.value = stepURL;
+            	}
+            );
+        },
+        appendTo: 'web_demo_pane'
+    });
+
+    //Giving a placeholder image while Aviary loads
+    var preview = document.getElementById('web_demo_preview');
+
+    //When the user clicks the button, import a file using Filepicker.io
+    var editPane = document.getElementById('start_web_demo');
+    editPane.onclick = function(){
+        filepicker.pick({mimetype: 'image/*', service:'COMPUTER'}, function(fpfile) {
+            //Showing the preview
+            preview.src = fpfile.url;
+
+            //Launching the Aviary Editor
+            featherEditor.launch({
+                image: preview,
+                url: fpfile.url
+            });
+        });
+    };
+</script>
 
 
-	

@@ -27,7 +27,7 @@
 <ul>
 <% @patterns.each do |pattern| %>
 	<li>
-		<%= pattern.name %> | <%= pattern.step1url %>
+		<%= pattern.name %> | <a href="<%= pattern.step1url %>"><%= pattern.step1url %></a>
 	</li>
 <% end %>
 </ul>
