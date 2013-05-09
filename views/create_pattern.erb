@@ -2,23 +2,74 @@
 <script type="text/javascript" src="http://feather.aviary.com/js/feather.js"></script> <!-- Image Cropper -->
 
 
-<div align="center">
-	<div id="web_demo_pane" style="position: relative; max-width: 800px; min-width: 400px;"></div>
-</div>
 <form action="/submit" method="POST">
-	<input type="text" name="pattern[name]" value="Enter Pattern Name" />
-	<br />
-	<input type="button" id="start_web_demo" value="Step 1 Upload" />
-	<input type="text" id="step_1_url" name="pattern[step1url]" value="File URL Should Go Here" />
-	<img id="web_demo_preview" alt="Preview">
-	<br />
-	<input type="submit" value="Submit" />
+    <input type="text" name="pattern[name]" value="Enter Pattern Name" /><br />
+    <!--<input type="text" name="pattern[parent]" value="Select Pattern Parent" /><br />-->
+    <br />
+
+    <input type="button" id="upload_scanned_template" value="Upload Scanned Template" /><br />
+    <img id="scanned_template_preview" alt="Preview"><br />
+    <br />
+
+    <input type="button" id="step_1_crop" value="Crop Step 1" onclick="cropTemplate(1)" /><br />   
+    <input type="text" id="step_1_url" name="pattern[step1url]" value="File URL Should Go Here" /><br />
+    <img id="step_1_preview" alt="Preview"><br /> 
+    <br />
+
+    <input type="button" id="step_2_crop" value="Crop Step 2" onclick="cropTemplate(2)" /><br />   
+    <input type="text" id="step_2_url" name="pattern[step1url]" value="File URL Should Go Here" /><br />
+    <img id="step_2_preview" alt="Preview"><br /> 
+    <br />
+
+    <!--<input type="text" name="pattern[original_url]" value="URL where this pattern first appeared" /><br />-->
+    <!--<input type="text" name="pattern[tanglepatterns_url]" value="URL on tanglepatterns.com" /><br />-->
+    <!--<input type="text" name="pattern[creator]" value="User ID of creator of this pattern" /><br />-->
+    <br />
+
+    <input type="submit" value="Submit" />
 </form>
 
 
+
+
+
+
+
+
 <script type='text/javascript'>
+
     //Setup Filepicker.io - to get an apikey, go to https://developers.filepicker.io/register/
     filepicker.setKey('AOHt7XNQxWfcwuPTrvoewz');
+
+    //Setting the scanned template preview image while Aviary loads
+    var scannedTemplatePreview = document.getElementById('scanned_template_preview');
+
+    var scannedTemplateFPfile;
+    var stepURLFieldID;
+    var stepPreviewFieldID;
+
+    //When the user clicks the upload scanned template button, import a file using Filepicker.io
+    var editPane = document.getElementById('upload_scanned_template');
+    editPane.onclick = function(){
+        filepicker.pick({mimetype: 'image/*', service:'COMPUTER'}, function(fpfile) {
+            scannedTemplateFPfile = fpfile;
+            //Showing the preview
+            scannedTemplatePreview.src = fpfile.url;
+        });
+    };
+
+    function cropTemplate(stepNumber){
+        stepURLFieldID = "step_" + stepNumber + "_url";
+        stepPreviewFieldID = "step_" + stepNumber + "_preview";
+        console.log(stepURLFieldID);
+        console.log(stepPreviewFieldID);
+        
+        //Launching the Aviary Editor
+        featherEditor.launch({
+            image: scannedTemplatePreview,
+            url: scannedTemplateFPfile.url
+        });
+    }
 
     //Setup Aviary
     var featherEditor = new Aviary.Feather({
@@ -27,38 +78,23 @@
         apiVersion: 2,
         tools: 'crop',
         initTool: 'crop',
-        cropPresets: [['Square','297x297']],
+        cropPresets: [['Square','290x290']],
         displayImageSize: 'true',
+        maxSize: '3300',
         onSave: function(imageID, newURL) {
             //Get the final file's S3 URL and put it in the form.
             filepicker.storeUrl(newURL, {extension:'.png', location: 'S3'}, 
-            	function(FPFile){
-            		var stepURL = "https://s3.amazonaws.com/tangletown/" + FPFile.key;
-            		var stepURLfield = document.getElementById('step_1_url');
-            		stepURLfield.value = stepURL;
-            	}
+                function(FPFile){
+                    var stepURL = "https://s3.amazonaws.com/tangletown/" + FPFile.key;
+                    var stepURLField = document.getElementById(stepURLFieldID);
+                    var stepPreviewField = document.getElementById(stepPreviewFieldID);
+                    stepURLField.value = stepURL;
+                    stepPreviewField.src = stepURL;
+                }
             );
         },
-        appendTo: 'web_demo_pane'
+        
     });
 
-    //Giving a placeholder image while Aviary loads
-    var preview = document.getElementById('web_demo_preview');
 
-    //When the user clicks the button, import a file using Filepicker.io
-    var editPane = document.getElementById('start_web_demo');
-    editPane.onclick = function(){
-        filepicker.pick({mimetype: 'image/*', service:'COMPUTER'}, function(fpfile) {
-            //Showing the preview
-            preview.src = fpfile.url;
-
-            //Launching the Aviary Editor
-            featherEditor.launch({
-                image: preview,
-                url: fpfile.url
-            });
-        });
-    };
 </script>
-
-
