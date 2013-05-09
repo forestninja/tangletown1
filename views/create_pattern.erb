@@ -1,21 +1,36 @@
 <script type="text/javascript">
 	function openFilePicker() {
 		filepicker.setKey('AOHt7XNQxWfcwuPTrvoewz');
-		filepicker.pickAndStore({
-			mimetype:"image/*", 
-			service:"COMPUTER",
-			multiple:"true",
-			location:"S3",
-		},
-     	function(fpfiles){
- 			console.log(JSON.stringify(fpfiles));
-		});
+		filepicker.pickAndStore(
+			{
+				mimetype:"image/*", 
+				service:"COMPUTER",
+				multiple:"true",
+				location:"S3",
+			},
+     		function(fpfiles){
+ 				filepicker.stat(
+     				fpfiles, 
+     				{path: true},
+  					function(metadata){
+    					console.log(JSON.stringify(metadata));
+					}
+				)
+			}
+		);
 	}
 </script>
 <form action="/submit" method="POST">
 	<input type="text" name="pattern[name]" value="Enter Pattern Name" />
+	<br />
+	<input type="text" name="pattern[step1url]" value="File URL Will Go Here" />
+	<input type="button" value="Upload Step 1 File" onclick="openFilePicker()" />
+	<br />
 	<input type="submit" value="Submit" />
 </form>
 
-<br /><br /><br />
-<input type="button" value="Open Filepicker" onclick="openFilePicker()" />
+
+	
+
+
+	
