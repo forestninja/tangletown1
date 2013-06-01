@@ -27,3 +27,8 @@ get '/' do
   @title = "TangleTown"
   erb :welcome
 end
+
+get '/czt' do
+  @title = "TangleTown Brag Books - CZT Product Spec Sheet"
+  redirect "/files/TT_Brag_Books_CZT_Spec_Sheet.pdf"
+end
