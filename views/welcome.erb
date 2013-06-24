@@ -27,7 +27,10 @@
 <ul>
 <% @patterns.each do |pattern| %>
 	<li>
-		<%= pattern.name %> | <a href="<%= pattern.step1url %>"><%= pattern.step1url %></a>
+		<%= pattern.name %><br />
+		<img src="<%= pattern.step1url %>"> | <img src="<%= pattern.step2url %>"> | <img src="<%= pattern.step3url %>"><br /><br />
+		<img src="<%= pattern.step4url %>"> | <img src="<%= pattern.step5url %>"> | <img src="<%= pattern.step6url %>"><br /><br />
+		<img src="<%= pattern.step7url %>"> | <img src="<%= pattern.step8url %>"> | <img src="<%= pattern.step9url %>"><br /><br />
 	</li>
 <% end %>
 </ul>
