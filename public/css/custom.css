@@ -1,0 +1,34 @@
+/* custom styles */
+
+.navbar a.brand {
+	padding-top: 4px;
+	padding-bottom: 4px;
+} /* Make the logo fit properly in the header bar. */
+
+img.tt-image {
+	border: 1px solid #F1F1F1;
+	padding: 4px;
+} /* Add a border to images. */
+
+div.tt-image {
+	padding-right: 16px;
+} /* Style the brag book product images on the homepage. */
+
+
+.modal-body
+{
+   max-height:80%;
+}
+.modal
+{
+   height:80%;
+   width:70%;
+   margin-left: -35%; 
+}
+@media (max-width: 768px) {
+   .modal
+   {
+    width:90%;
+        margin-left: 2%; 
+   }
+}
