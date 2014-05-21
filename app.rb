@@ -8,7 +8,6 @@ configure :development do
   set :bind, '0.0.0.0'   
   set :port, 3000 # Not really needed, but works well with the "Preview" menu option
 end
-
 use Rack::GoogleAnalytics, :tracker => 'UA-40494819-1'
 
 configure do
