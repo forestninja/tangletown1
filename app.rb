@@ -47,6 +47,11 @@ get '/create-pattern' do
   erb :create_pattern
 end
 
+delete '/patterns/:id' do
+  @pattern = Pattern.find(params[:id]).destroy
+  redirect '/'
+end
+
 post '/submit-pattern' do
 	@pattern = Pattern.new(params[:pattern])
 	if @pattern.save
