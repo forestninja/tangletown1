@@ -4,6 +4,7 @@ require 'sinatra'
 require 'rack-google-analytics'
 require 'sinatra/activerecord'
 require './config/environments' #database configuration
+require './models/pattern'
 
 # Set port for compatability with nitrous.io
 configure :development do   
