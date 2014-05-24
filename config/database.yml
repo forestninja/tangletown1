@@ -1,0 +1,6 @@
+development:
+  adapter: postgresql
+  database: ttdev
+  username: <%= ENV['admin'] %>
+  password: <%= ENV['tt2014'] %>
+  host: localhost

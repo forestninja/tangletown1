@@ -2,6 +2,8 @@ require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
 require 'rack-google-analytics'
+require 'sinatra/activerecord'
+require './config/environments' #database configuration
 
 # Set port for compatability with nitrous.io
 configure :development do   
