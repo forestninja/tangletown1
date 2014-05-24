@@ -34,10 +34,20 @@ end
 
 get '/' do
   @title = "TangleTown"
+  @patterns = Pattern.all
   erb :welcome
 end
 
 get '/czt' do
   @title = "TangleTown Brag Books - CZT Product Spec Sheet"
   redirect "/files/TT_Brag_Books_CZT_Spec_Sheet.pdf"
+end
+
+post '/create-pattern' do
+	@pattern = Pattern.new(params[:pattern])
+	if @pattern.save
+		redirect '/'
+	else
+		"Sorry, there was an error!"
+	end
 end
