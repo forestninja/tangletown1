@@ -43,7 +43,11 @@ get '/czt' do
   redirect "/files/TT_Brag_Books_CZT_Spec_Sheet.pdf"
 end
 
-post '/create-pattern' do
+get '/create-pattern' do
+  erb :create_pattern
+end
+
+post '/submit-pattern' do
 	@pattern = Pattern.new(params[:pattern])
 	if @pattern.save
 		redirect '/'
