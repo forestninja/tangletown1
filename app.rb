@@ -34,7 +34,7 @@ end
 
 get '/' do
   @title = "TangleTown"
-  @patterns = Pattern.all
+  @patterns = Pattern.order('created_at DESC')
   erb :welcome
 end
 

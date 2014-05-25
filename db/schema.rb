@@ -11,24 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140524162152) do
+ActiveRecord::Schema.define(version: 20140525175715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "patterns", force: true do |t|
-    t.string "name"
-    t.string "step1url"
-    t.string "step2url"
-    t.string "step3url"
-    t.string "step4url"
-    t.string "step5url"
-    t.string "step6url"
-    t.string "step7url"
-    t.string "step8url"
-    t.string "step9url"
-    t.string "original_url"
-    t.string "tanglepatterns_url"
+    t.string   "name"
+    t.string   "step1url"
+    t.string   "step2url"
+    t.string   "step3url"
+    t.string   "step4url"
+    t.string   "step5url"
+    t.string   "step6url"
+    t.string   "step7url"
+    t.string   "step8url"
+    t.string   "step9url"
+    t.string   "original_url"
+    t.string   "tanglepatterns_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
