@@ -134,18 +134,20 @@
 
 
 <br /><br /><br /><br /><br /><br />
-<ul>
+<ul class="unstyled">
 <% @patterns.each do |pattern| %>
 	<li>
+    <hr/>
+    <span class="pull-right">
+      <form action='/patterns/<%= pattern.id %>' method='post'>
+        <input type='hidden' name='_method' value='delete' /> 
+        <input type='submit' value='Delete Pattern' />
+      </form>  
+    </span>
     <%= pattern.name %> | <%= pattern.original_url %> | <%= pattern.tanglepatterns_url %><br />
     <%= pattern.step1url %> | <%= pattern.step2url %> | <%= pattern.step3url %><br />
     <%= pattern.step4url %> | <%= pattern.step5url %> | <%= pattern.step6url %><br />
-    <%= pattern.step7url %> | <%= pattern.step8url %> | <%= pattern.step9url %><br />
-    <form action='/patterns/<%= pattern.id %>' method='post'>
-        <input type='hidden' name='_method' value='delete' /> 
-        <input type='submit' value='Delete Pattern' />
-    </form>
-    <br /><br />
+    <%= pattern.step7url %> | <%= pattern.step8url %> | <%= pattern.step9url %>
     <!--
 		<img src="<%= pattern.step1url %>"> | <img src="<%= pattern.step2url %>"> | <img src="<%= pattern.step3url %>"><br /><br />
 		<img src="<%= pattern.step4url %>"> | <img src="<%= pattern.step5url %>"> | <img src="<%= pattern.step6url %>"><br /><br />
